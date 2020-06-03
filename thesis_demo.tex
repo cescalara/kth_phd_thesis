@@ -1,0 +1,144 @@
+\documentclass[g5paper,10pt,final,openright,coverpage,swedish]{thesis}
+
+%% Standard packages
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{pdfpages}
+\usepackage[hidelinks]{hyperref}
+
+%% Epigraphs
+\usepackage{epigraph}
+
+%% Bibliography
+\usepackage[citestyle=authoryear,
+bibstyle=authoryear,
+sorting=nyt,
+backend=bibtex,
+natbib]{biblatex}
+\setlength\bibitemsep{0.5\baselineskip}
+%\addbibresource{Thesis_bibliography.bib}
+
+%% Document information 
+\title{Thesis title}
+\author{Your Name}
+\date{May 2020}
+\shortdate{2020}
+\type{Doctoral Thesis in Physics}
+\division{Particle and Astroparticle Physics}
+\department{Department of Physics}
+\address{SE-106 91 Stockholm, Sweden}
+\city{Stockholm}
+\country{Sweden}
+\publisher{Printed by Universitetsservice US-AB}
+\copyrightline{\copyright\ Your Name, May 2020}
+\trita{Get from administration/online}
+\isbn{Get from administration/online}
+
+%\issn{}
+%\isrn{}
+%\isrn{KTH/FYS/\mbox{-}\mbox{-}16:81\mbox{-}\mbox{-}SE}
+%TRITA-FYS 2016:81
+%ISSN 0280-316X
+%ISRN KTH/FYS/--16:81—SE
+
+\cplogo{kth_svv.png}
+\cplogonblines{1} % Number of text lines below kth logo... don't ask..
+%\cpillustration{image_filename} % Front page image
+\innerlogo{\includegraphics[width=32mm]{kth_svv.png}}
+\centercomment{Cover illustration: } 
+\foregincomment{Akademisk avhandling som med tillst{\aa}nd av Kungliga Tekniska h{\"o}gskolan i Stockholm framl{\"a}gges till offentlig granskning f{\"o}r avl{\"a}ggande av teknologie doktorsexamen [date, time, and place], AlbaNova Universitetscentrum, Roslagstullsbacken 21, Stockholm.\\ \\ Avhandlingen f{\"o}rsvaras p{\aa} engelska.}
+
+%% Command for small comments in the margin
+\newcommand{\n}[1]{\marginpar[\raggedleft\scriptsize\textsf{#1}]{\raggedright\scriptsize\textsf{#1}}}
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+
+%% Journal abbreviations
+\newcommand\aap{{A\&A}}      
+\newcommand\apj{{ApJ}}       
+\newcommand\apjs{{ApJS}}     
+\newcommand\apjl{{ApJL}}     
+\newcommand\mnras{{MNRAS}}   
+\newcommand\physrep{{Physics Reports}} 
+\newcommand\nat{{Nature}}    
+\newcommand{\apss}{Ap\&SS}
+
+%% Useful commands
+\newcommand{\todo}[1]{(\textbf{TODO:} #1)}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{{\rm d}#1}{{\rm d}#2}}
+\newcommand{\Fig}{[{\bf FIG}]}
+\newcommand{\chk}{[{\bf CHECK}]}
+
+
+%% Style hacks
+%\makeatletter
+%\g@addto@macro\@floatboxreset\centering
+%\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+%\makeatother
+
+
+%% MAIN DOCUMENT %%
+
+\begin{document}
+
+\maketitle
+
+\cleardoublepage
+
+\include{abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\include{sammanfattning}
+\addcontentsline{toc}{chapter}{Sammanfattning}
+
+\tableofcontents
+
+%% Introduction
+\include{introduction}
+
+%% Paper summary 
+\include{paper_summary}
+\addcontentsline{toc}{chapter}{Summary of the attached papers}
+
+%% Author contribution
+\include{Author_contribution}
+\addcontentsline{toc}{chapter}{Author's contribution to the attached papers}
+
+%% Acknowledgements
+\include{acknowledgments}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+
+% This separates the introduction from the main part of the thesis.
+\mainmatter
+
+%% Chapters
+\cleardoublepage
+%\include{chapter1}
+%\include{chapter2}
+
+%% List of tables 
+%\addcontentsline{toc}{chapter}{List of tables}
+%\listoftables
+
+%% List of figures 
+\addcontentsline{toc}{chapter}{List of figures}
+\listoffigures
+
+%% Bibliography 
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\printbibliography
+\cleardoublepage
+
+%% Papers
+\addcontentsline{toc}{chapter}{Papers}
+\part*{Scientific papers}
+%\label{papers}
+%\includepdf[pages={1-5}]{}
+%\includepdf[pages={1-}]{}
+%\includepdf[pages={1-}]{}
+
+\end{document}
