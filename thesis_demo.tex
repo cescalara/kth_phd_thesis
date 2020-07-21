@@ -5,10 +5,26 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{pdfpages}
+\usepackage{booktabs}
 \usepackage[hidelinks]{hyperref}
 
-%% Epigraphs
+%% For demo text
+\usepackage{lipsum}
+
+%% Epigraph
 \usepackage{epigraph}
+\makeatletter
+   \let\@epipart\@endpart
+   \renewcommand{\@endpart}{\thispagestyle{epigraph}\@epipart}
+\makeatother         
+\setlength\epigraphwidth{\textwidth}
+
+%% Glossary
+\usepackage[acronym,
+nomain,
+nonumberlist,
+nopostdot]{glossaries}
+\makeglossaries
 
 %% Bibliography
 \usepackage[citestyle=authoryear,
@@ -16,8 +32,13 @@ bibstyle=authoryear,
 sorting=nyt,
 backend=bibtex,
 natbib]{biblatex}
+\addbibresource{bibliography.bib}
 \setlength\bibitemsep{0.5\baselineskip}
-%\addbibresource{Thesis_bibliography.bib}
+
+%% Sections with no indent
+\newenvironment{zeroindent}
+{\par\setlength{\parindent}{0pt}}
+{\par}
 
 %% Document information 
 \title{Thesis title}
@@ -34,111 +55,77 @@ natbib]{biblatex}
 \copyrightline{\copyright\ Your Name, May 2020}
 \trita{Get from administration/online}
 \isbn{Get from administration/online}
-
-%\issn{}
-%\isrn{}
-%\isrn{KTH/FYS/\mbox{-}\mbox{-}16:81\mbox{-}\mbox{-}SE}
-%TRITA-FYS 2016:81
-%ISSN 0280-316X
-%ISRN KTH/FYS/--16:81—SE
-
-\cplogo{kth_svv.png}
+\cplogo{images/kth_logo.png}
 \cplogonblines{1} % Number of text lines below kth logo... don't ask..
-%\cpillustration{image_filename} % Front page image
-\innerlogo{\includegraphics[width=32mm]{kth_svv.png}}
-\centercomment{Cover illustration: } 
+\cpillustration{images/nyan_cat.png} % Front page image
+\innerlogo{\includegraphics[width=32mm]{images/kth_logo.png}}
+\centercomment{Cover illustration: Nyan cat} 
 \foregincomment{Akademisk avhandling som med tillst{\aa}nd av Kungliga Tekniska h{\"o}gskolan i Stockholm framl{\"a}gges till offentlig granskning f{\"o}r avl{\"a}ggande av teknologie doktorsexamen [date, time, and place], AlbaNova Universitetscentrum, Roslagstullsbacken 21, Stockholm.\\ \\ Avhandlingen f{\"o}rsvaras p{\aa} engelska.}
 
-%% Command for small comments in the margin
-\newcommand{\n}[1]{\marginpar[\raggedleft\scriptsize\textsf{#1}]{\raggedright\scriptsize\textsf{#1}}}
-\newcommand{\beq}{\begin{equation}}
-\newcommand{\eeq}{\end{equation}}
-
-%% Journal abbreviations
-\newcommand\aap{{A\&A}}      
-\newcommand\apj{{ApJ}}       
-\newcommand\apjs{{ApJS}}     
-\newcommand\apjl{{ApJL}}     
-\newcommand\mnras{{MNRAS}}   
-\newcommand\physrep{{Physics Reports}} 
-\newcommand\nat{{Nature}}    
-\newcommand{\apss}{Ap\&SS}
-
-%% Useful commands
-\newcommand{\todo}[1]{(\textbf{TODO:} #1)}
-\newcommand{\ud}{\mathrm{d}}
-\newcommand{\dd}[2]{\frac{{\rm d}#1}{{\rm d}#2}}
-\newcommand{\Fig}{[{\bf FIG}]}
-\newcommand{\chk}{[{\bf CHECK}]}
-
-
-%% Style hacks
-%\makeatletter
-%\g@addto@macro\@floatboxreset\centering
-%\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
-%\makeatother
-
-
 %% MAIN DOCUMENT %%
-
 \begin{document}
 
 \maketitle
 
 \cleardoublepage
 
-\include{abstract}
-\addcontentsline{toc}{chapter}{Abstract}
+\include{tex/abstract}
 
-\include{sammanfattning}
-\addcontentsline{toc}{chapter}{Sammanfattning}
+\include{tex/sammanfattning}
 
 \tableofcontents
 
-%% Introduction
-\include{introduction}
+\include{tex/introduction}
 
-%% Paper summary 
-\include{paper_summary}
-\addcontentsline{toc}{chapter}{Summary of the attached papers}
+\include{tex/paper_summary}
 
-%% Author contribution
-\include{Author_contribution}
-\addcontentsline{toc}{chapter}{Author's contribution to the attached papers}
+\include{tex/author_contribution}
 
-%% Acknowledgements
-\include{acknowledgments}
-\addcontentsline{toc}{chapter}{Acknowledgements}
+\include{tex/acknowledgements}
 
 % This separates the introduction from the main part of the thesis.
 \mainmatter
 
 %% Chapters
 \cleardoublepage
-%\include{chapter1}
-%\include{chapter2}
+
+\include{tex/part1}
+\include{tex/chapter1}
+\include{tex/chapter2}
+
+\include{tex/part2}
+
+%% List of acronyms
+\glsaddall
+\renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
+\setglossarystyle{alttree}
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Acronyms}
+\printglossary[type=acronym]
 
 %% List of tables 
-%\addcontentsline{toc}{chapter}{List of tables}
-%\listoftables
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Tables}
+\listoftables
 
 %% List of figures 
-\addcontentsline{toc}{chapter}{List of figures}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Figures}
 \listoffigures
 
 %% Bibliography 
 \cleardoublepage
+\phantomsection
 \addcontentsline{toc}{chapter}{Bibliography}
-
 \printbibliography
 \cleardoublepage
 
-%% Papers
-\addcontentsline{toc}{chapter}{Papers}
-\part*{Scientific papers}
-%\label{papers}
-%\includepdf[pages={1-5}]{}
-%\includepdf[pages={1-}]{}
-%\includepdf[pages={1-}]{}
+\epigraphhead[350]{\centering \textit{I see sounds.} \\ \textemdash Kanye West}
+\part{Papers}
+\label{papers}
+% \includepdf[pages={1-}]{papers/file1.pdf}
+% \includepdf[pages={1-}]{papers/file2.pdf}
 
 \end{document}
